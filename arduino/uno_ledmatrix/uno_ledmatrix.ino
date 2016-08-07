@@ -39,13 +39,16 @@ const int g_chars[] PROGMEM = {
   'X', B00100010, B00100010, B00010100, B00001000, B00010100, B00100010, B00100010, B00000000, 6,
   'Y', B00100010, B00100010, B00100010, B00010100, B00001000, B00001000, B00001000, B00000000, 6,
   'Z', B00111110, B00000010, B00000100, B00001000, B00010000, B00100000, B00111110, B00000000, 6,
+  'a', B00000000, B00000000, B00011100, B00000010, B00011110, B00100010, B00011110, B00000000, 6,
+  'i', B00000100, B00000000, B00001100, B00000100, B00000100, B00000100, B00001110, B00000000, 4,
+  'l', B00001100, B00000100, B00000100, B00000100, B00000100, B00000100, B00001110, B00000000, 4,
   NULL
 };
 LedControl g_lc = LedControl(10, 12, 11, 1);
 String g_serial = "";
 String g_message = "  READY  ";
 int g_pos = 0;
-unsigned long g_speed = 75;
+unsigned long g_delay = 75;
 unsigned long g_time = 0;
 
 void setup() {
@@ -66,14 +69,14 @@ void loop() {
     if (g_serial.startsWith("i:")) {
       g_lc.setIntensity(0, g_serial.substring(2).toInt());
     }
-    if (g_serial.startsWith("s:")) {
-      g_speed = g_serial.substring(2).toInt();
+    if (g_serial.startsWith("d:")) {
+      g_delay = g_serial.substring(2).toInt();
     }
   }
   if (millis() < g_time) {
     return;
   }
-  g_time = millis() + g_speed;
+  g_time = millis() + g_delay;
 
   int i, m, pos, j, k, o, row, mask, value, l;
 
