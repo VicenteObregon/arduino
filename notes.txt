@@ -1,0 +1,11 @@
+notes.txt
+
+:Author: vicente
+:Email: desarrollogis@gmail.com
+:Date: 2018-10-22 18:43
+
+VCC 5v
+GND GND
+DIN 12
+CS  10
+CLK 11
